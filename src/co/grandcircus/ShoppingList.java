@@ -34,6 +34,7 @@ public class ShoppingList
 		System.out.println();
 		int counter = 0;
 		do {
+			//Store printout and number connection
 		for(String list: items.keySet())
 		{
 			itemNumber.put(++counter,list);
@@ -46,10 +47,12 @@ public class ShoppingList
 			if (scan.hasNextInt())
 			{
 				quantityInput = scan.nextInt();
+				//number input check
 				if(quantityInput>0 && quantityInput<9)
 				{
 					userChoice = itemNumber.get(quantityInput);
 				}
+				//exit option
 				else if(quantityInput==9)
 					{
 					System.out.println("Goodbye!");
@@ -70,12 +73,15 @@ public class ShoppingList
 			if (items.containsKey(userChoice)) 
 			{
 				System.out.println("You have added " + userChoice);
+				
+				//add new products
 				if (!product.contains(userChoice)) 
 				{
 					product.add(userChoice);
 					price.add(items.get(userChoice));
 					quantity.add(0);
 				}
+				//adds current value to old value to set quantity
 				quantityInput = Validator.getInt(scan, "Please enter how many you would like to purchase: ");
 				quantity.set(product.indexOf(userChoice),
 				quantity.get(product.indexOf(userChoice)) + quantityInput);
@@ -87,7 +93,7 @@ public class ShoppingList
 			System.out.print("Do you want to order anything else? (y/n): ");
 			cont=scan.nextLine();
 		} while (cont.equalsIgnoreCase("Y") || cont.equalsIgnoreCase("Yes")) ;
-		
+		//output
 		System.out.println("Receipt");
 		System.out.println("Product                 Cost              Quantity");
 		System.out.println("##################################################\n");
@@ -98,7 +104,7 @@ public class ShoppingList
 			System.out.println();
 		}
 		double avg = findTheAverage(price,quantity);
-		System.out.printf("Your average item costed: $%6.2f\n", avg);
+		System.out.printf("Your average item costed: $%-6.2f\n", avg);
 		System.out.printf("Your cheapest item was %s at $%-6.2f\n",
 		product.get(findTheLowest(price)), price.get(findTheLowest(price)));
 		System.out.printf("Your most expensive item was %s at $%-6.2f\n",
